@@ -7,7 +7,7 @@ LaTeX Compiler:
             where the LaTeX/BibTeX commands (program) are executed.
             To use this program the right way, navigate to the directory of the main .tex file and execute the program there, so there
             won't be any LaTeX/BibTeX (No File Found) errors. For more informations on how to use this program read the
-            instructions on the GitHub repository: <TODO LINK>
+            instructions on the GitHub repository: https://github.com/amrane99/LaTeX-Compiler
     @author: Amin Ranem (GitHub: https://github.com/amrane99, LinkedIn: https://www.linkedin.com/in/amin-ranem-4b79b5195)
 """
 
