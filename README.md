@@ -1,1 +1,1 @@
-# LaTeX-Compiler
+# Convenient LaTeX Compiler

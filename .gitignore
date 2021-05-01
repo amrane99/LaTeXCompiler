@@ -127,3 +127,13 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Private files (e.g. sontaining private data information)
+*_private.py
+
+# VS code project setup
+.vscode
+
+# MacOS files
+.DS_Store
+._*
