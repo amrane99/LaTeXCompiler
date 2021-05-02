@@ -16,6 +16,25 @@ import argparse
 import traceback
 from utils.compile_tex_files import compile_tex_files
 
+def _compile_document(tex_engine, bib_engine, no_bib, path, folder_name):
+    r"""This function compiles .tex files into .pdf files using the submitted information.
+        NOTE: It can especially be used for programs that generate (LaTeX) file to compile them
+              afterwards into reports (pdf) in an autmoated manner without human steps, e.g.:
+              import JC._compile_document as compile_document
+              # Code that generates a .tex file
+              # ...
+              compile_document(...) # Compile the generated .tex file LaTeX using the specified engines etc.
+        """
+    # 1. Extract necessary paths
+    # Get current directory to texfile
+    basedir = os.path.dirname(os.path.realpath(path))
+    # Define directory /<foldername> for auxiliary files
+    auxdir = os.path.join(basedir, folder_name)
+    
+    # 2. Compile document(s) using tex_engine and bib_engine if no_bib = False
+    compile_tex_files(tex_engine, bib_engine, no_bib, basedir, auxdir, path, folder_name)
+    
+
 if __name__ == "__main__": 
     # 1. Build Argumentparser
     parser = argparse.ArgumentParser(description='Compile a Latex file the convenient way by using only one command.'+
@@ -48,18 +67,11 @@ if __name__ == "__main__":
     if isinstance(folder_name, list):
         folder_name = folder_name[0]
 
-    # 3. Extract necessary paths
-    # Get current directory to texfile
-    basedir = os.path.dirname(os.path.realpath(path))
-    # Define directory /<foldername> for auxiliary files
-    auxdir = os.path.join(basedir, folder_name)
-    
-    # 4. Compile document(s)
+    # 3. Compile document(s)
     try:
-        compile_tex_files(tex_engine, bib_engine, no_bib, basedir, auxdir, path, folder_name)
+        _compile_document(tex_engine, bib_engine, no_bib, path, folder_name)
         print('Compilation sucessfully finished.')
     except:
         # Print error message
         error = traceback.format_exc()
         print('During the compilation of the files the following error occured: {}.'.format(error))
-        
