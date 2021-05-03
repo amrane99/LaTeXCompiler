@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#!/usr/bin/env python3
 """
 LaTeX Compiler:
     This program can be used to conveniently compile LaTeX documents with a single command.
@@ -40,18 +41,18 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Compile a Latex file the convenient way by using only one command.'+
                                                   ' The auxiliary files will be stored in a seperate folder, so only the'+
                                                   ' .pdf and .tex files will remain in the working directory.')
-    parser.add_argument('--tex_engine', choices=['pdflatex', 'lualatex', 'xelatex'], required=False, default='pdflatex',
+    parser.add_argument('-tex_engine', choices=['pdflatex', 'lualatex', 'xelatex'], required=False, default='pdflatex',
                         help='Specify which LaTeX engine to use: pdflatex, lualatex or xelatex.'+
                              ' Default: pdflatex engine will be used to compile.')
-    parser.add_argument('--bib_engine', choices=['biber', 'bibtex'], required=False, default='biber',
+    parser.add_argument('-bib_engine', choices=['biber', 'bibtex'], required=False, default='biber',
                         help='Specify which BibTeX engine to use: biber or bibtex.'+
                              ' Default: biber engine will be used to compile.')
-    parser.add_argument('--no_bib_engine', action='store_const', const=True, default=False,
+    parser.add_argument('-no_bib_engine', action='store_const', const=True, default=False,
                         help='Use this tag if the BibTeX engine should not be used, ie. if .tex file has no Bibliography.'+
                             ' Default: BibTex engine will be used.')
-    parser.add_argument('--file', action='store', type=str, nargs=1, required=True,
+    parser.add_argument('-file', action='store', type=str, nargs=1, required=True,
                         help='Specify full path to the main .tex file.')
-    parser.add_argument('--aux_folder', action='store', type=str, nargs=1, required=False, default='.latex',
+    parser.add_argument('-aux_folder', action='store', type=str, nargs=1, required=False, default='.latex',
                         help='Specify the name of the folder to which the auxiliary files will be saved.'+
                              ' Default: All auxiliary files will be saved into /.latex.')
 
