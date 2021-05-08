@@ -10,7 +10,6 @@ setup(
     url='https://github.com/amrane99/LaTeX-Compiler',
     keywords='python setuptools',
     packages=find_packages(include=['lc', 'lc.*']),
-    url='https://github.com/amrane99/LaTeX-Compiler',
     author='Amin Ranem',
     author_email='aminranem@googlemail.com',
     license='MIT License',
