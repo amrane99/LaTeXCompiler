@@ -1,5 +1,6 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#!/usr/bin/env python3
+
 """
 This module includes helpful functions and the logic behind the program.
 @author: Amin Ranem (GitHub: https://github.com/amrane99, LinkedIn: https://www.linkedin.com/in/amin-ranem-4b79b5195)
@@ -32,7 +33,7 @@ def compile_tex_files(tex_engine, bib_engine, no_bib, basedir, auxdir, path, fol
             # Execute LaTeX engine
             _compile_file(tex_engines[tex_engine], path)
 
-    # Use BibLaTex --> compile 2 time LaTeX -- 1 time BibLaTex -- 1 time LaTeX
+    # Use BibLaTex --> compile 2 times LaTeX -- 1 time BibLaTex -- 1 time LaTeX
     else:
         # Compile .tex file two times since Table Of Content can be included, etc.
         for i in tqdm(range(4), ascii=True, desc="Compile LaTeX file(s)"):
