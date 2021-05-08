@@ -10,7 +10,7 @@ setup(
     url='https://github.com/amrane99/LaTeX-Compiler',
     keywords='python latex',
     package_dir={"": "lc"},
-    packages=find_packages(where=['lc', 'lc.*']),
+    packages=find_packages(includes=['lc', 'lc.*']),
     author='Amin Ranem',
     author_email='aminranem@googlemail.com',
     license='MIT License',
