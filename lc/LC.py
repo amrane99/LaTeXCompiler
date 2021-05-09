@@ -18,7 +18,7 @@ import argparse
 import traceback
 from utils.compile_tex_files import compile_tex_files
 
-def _compile_document(tex_engine, bib_engine, no_bib, path, folder_name):
+def compile_document(tex_engine, bib_engine, no_bib, path, folder_name):
     r"""This function compiles .tex files into .pdf files using the submitted information.
         NOTE: It can especially be used for programs that generate (LaTeX) file to compile them
               afterwards into reports (pdf) in an autmoated manner without human steps, e.g.:
@@ -36,8 +36,7 @@ def _compile_document(tex_engine, bib_engine, no_bib, path, folder_name):
     # 2. Compile document(s) using tex_engine and bib_engine if no_bib = False
     compile_tex_files(tex_engine, bib_engine, no_bib, basedir, auxdir, path, folder_name)
     
-
-if __name__ == "__main__": 
+def _main():
     # 1. Build Argumentparser
     parser = argparse.ArgumentParser(description='Compile a Latex file the convenient way by using only one command.'+
                                                   ' The auxiliary files will be stored in a seperate folder, so only the'+
@@ -71,9 +70,12 @@ if __name__ == "__main__":
 
     # 3. Compile document(s)
     try:
-        _compile_document(tex_engine, bib_engine, no_bib, path, folder_name)
+        compile_document(tex_engine, bib_engine, no_bib, path, folder_name)
         print('Compilation sucessfully finished.')
     except:
         # Print error message
         error = traceback.format_exc()
         print('During the compilation of the files the following error occured: {}.'.format(error))
+
+if __name__ == "__main__":
+    _main()

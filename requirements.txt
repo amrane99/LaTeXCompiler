@@ -1,5 +1,5 @@
-# LaTeX_Compiler/setup.py: 1
+# LaTeX-Compiler/setup.py: 4
 setuptools == 54.2.0
 
-# LaTeX_Compiler/lc/utils/compile_tex_files.py: 8
+# LaTeX_Compiler/lc/utils/compile_tex_files.py: 11
 tqdm == 4.60.0
