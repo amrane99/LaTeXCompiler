@@ -4,8 +4,8 @@
 from setuptools import setup, find_packages
 
 setup(
-  name = 'lc',         # How you named your package folder (MyLib)
-  packages = ['lc'],   # Chose the same as "name"
+  name = 'LatexCompiler',         # How you named your package folder (MyLib)
+  packages = ['LatexCompiler'],   # Chose the same as "name"
   version = '0.1',     # Start with a small number and increase it with every change you make
   license='MIT',       # Chose a license from here: https://help.github.com/articles/licensing-a-repository
   description = 'A program for compiling LaTeX files the convenient way by stashing the auxiliary files into a specified folder.',   # Give a short description about your library
@@ -25,7 +25,7 @@ setup(
   ],
   entry_points={
     'console_scripts': [
-        'LaTeX-Compiler = lc.LC:_main',
+        'LatexCompiler = lc.LC:_main',
     ],
   },
 )
