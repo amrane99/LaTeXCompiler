@@ -14,8 +14,11 @@ This repository represents a convenient LaTeX Compiler, that can be used to comp
 
 ## Installation
 To install the module simply using PyPi, like:
+
 `pip install LatexCompiler`
+
 or directly from the repository:
+
 `pip install git+https://github.com/amrane99/LatexCompiler`
 
 
@@ -42,7 +45,7 @@ Note that the algorithm will first check if the auxiliary directory already exis
 
 | Tag_name | description | required | choices | default | 
 |:-:|-|:-:|:-:|:-:|
-| `-file` | Specify *full path* to the main .tex file. | yes | -- | -- |
+| `-file` | Specify *[full] path* to the main .tex file. | yes | -- | -- |
 | `-tex_engine` | Specify which LaTeX engine to use. | no | `pdflatex, lualatex, xelatex` | `pdflatex` |
 | `-bib_engine` | Specify which BibTeX engine to use. | no | `biber, bibtex` | `biber` |
 | `-no_bib_engine` | Use this flag if the BibTeX engine should not be used, ie. .tex file has no Bibliography. | no | -- | `False` |
@@ -55,7 +58,7 @@ Note that the algorithm will first check if the auxiliary directory already exis
 		  ~ $ source activate <your_anaconda_env>
 <your_anaconda_env> $ cd LaTeX_project_XX
 <your_anaconda_env> $ LatexCompiler
-					  -file /LaTeX_project_XX/example.tex
+					  -file example.tex
 					  -tex_engine lualatex -bib_engine bibtex
 					  -aux_folder .aux
 ```
@@ -65,7 +68,7 @@ Note that the algorithm will first check if the auxiliary directory already exis
 		  ~ $ source activate <your_anaconda_env>
 <your_anaconda_env> $ cd LaTeX_project_XX
 <your_anaconda_env> $ LatexCompiler
-					  -file /LaTeX_project_XX/example.tex
+					  -file example.tex
 					  -tex_engine xelatex -no_bib_engine
 					  -aux_folder auxiliary_files
 ```
@@ -74,10 +77,10 @@ Note that in the second example no BibTeX engine will be used, so the command
  xelatex /LaTeX_project_XX/example.tex
 ```
 
-would be executed only once, if the auxiliary files at `/LaTeX_project_XX/auxiliary_files` exist and twice otherwise. In both examples, the first two steps can be omitted, if this module is installed in the systems environment.
+would be executed only once, if the auxiliary files at `/LaTeX_project_XX/auxiliary_files` exist and twice otherwise. In both examples, the first two steps can be omitted, if this module is installed in the systems environment. Further, if the command will be executed within the folder of the .tex file, only the .tex file itself and not the full path needs to be provided.
 
 ### Advanced use in Python program
-Let's assume there is a Python algorithm/program that automatically generates a .tex file. The in this module provided function `_compile_document(tex_engine, bib_engine, no_bib, path, folder_name)` can then be used in the program after saving the generated file to compile the file as well:
+Let's assume there is a Python algorithm/program that automatically generates a .tex file. The in this module provided function `compile_document(tex_engine, bib_engine, no_bib, path, folder_name)` can then be used in the program after saving the generated file to compile the file as well:
 ```python
 from LatexCompiler.LatexCompiler import LC
 ```
