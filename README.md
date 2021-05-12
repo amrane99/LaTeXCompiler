@@ -87,20 +87,18 @@ With the following flags and arguments, the used engines and name of auxiliary f
           ~ $ source ~/.bashrc
           ~ $ source activate <your_anaconda_env>
 (<your_anaconda_env>) $ cd LaTeX_project_XX
-(<your_anaconda_env>) LaTeX_project_XX $ LatexCompiler
-                      -file example.tex
-                      -tex_engine lualatex -bib_engine bibtex
-                      -aux_folder .aux
+(<your_anaconda_env>) LaTeX_project_XX $ LatexCompiler -file example.tex
+                                                       -tex_engine lualatex -bib_engine bibtex
+                                                       -aux_folder .aux
 ```
 2. If the LaTeX `example.tex` file, located at `/LaTeX_project_XX` needs to be executed using XeLaTeX without using a BibTeX engine since it does not have a bibliography, while stashing the auxiliary files into `/LaTeX_project_XX/auxiliary_files/`, the command would be the following: 
 ```bash
           ~ $ source ~/.bashrc
           ~ $ source activate <your_anaconda_env>
 (<your_anaconda_env>) $ cd LaTeX_project_XX
-(<your_anaconda_env>) LaTeX_project_XX $ LatexCompiler
-                      -file example.tex
-                      -tex_engine xelatex -no_bib_engine
-                      -aux_folder auxiliary_files
+(<your_anaconda_env>) LaTeX_project_XX $ LatexCompiler -file example.tex
+                                                       -tex_engine xelatex -no_bib_engine
+                                                       -aux_folder auxiliary_files
 ```
 Note that in the second example no BibTeX engine will be used, so the command
 ```bash
