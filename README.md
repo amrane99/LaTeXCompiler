@@ -19,31 +19,34 @@ This repository represents a convenient LaTeX Compiler, that can be used to comp
 [License](#license)
 
 ## Introduction
-The simple fact that LaTeX previewers like [TeXShop](https://pages.uoregon.edu/koch/texshop/) *-- for MacOS Systems at least --* do not provide the function to store the auxiliary files into an extra folder was the originator of this work. The auxiliary files are simply stashed in the working directory instead. [TeXstudio](https://www.texstudio.org) eg. provides the --`-aux-directory <directory>` command for Windows users to specify the folder in which the auxiliary files will be stored. With this module, it is possible (for each system -- Linux, MacOS or Windows) to compile LaTeX files in such a way, that the auxiliary files will be stored in an extra folder, specified by the user. The files are moved into the desired folder, and not deleted, since these files contain important informations about the Bibliography, Table Of Contents (TOC), Table Of Figures (TOF), Acronyms, etc. which are of interest in the output file (.pdf) at the end. Without them, the Bibliography etc. will not be displayed in the output file. If these files are present, one LaTeX command less needs to be executed than in the scenario where they were not. All in all, there are two Pipelines based on the existence of the auxiliary files:
-- Auxiliary files do not exist, they need to be generated first, so that TOC, TOF etc. will be visible in the output file :
+The simple fact that LaTeX previewers like [TeXShop](https://pages.uoregon.edu/koch/texshop/) *-- for MacOS Systems at least --* do not provide the function to store the auxiliary files into an extra folder was the originator of this work. The auxiliary files are simply stashed in the working directory. [TeXstudio](https://www.texstudio.org) eg. provides the --`-aux-directory <directory>` command for Windows users to specify the folder in which the auxiliary files will be stored. With this module, it is possible *-- for each system, ie. Linux, MacOS or Windows --* to compile LaTeX files in such a way, that the auxiliary files will be stored in an extra folder, specified by the user. The files are moved into the desired folder, and not deleted, since these files contain important informations about the Bibliography, Table Of Contents (TOC), Table Of Figures (TOF), Acronyms, etc. which are of interest in the output file (.pdf) at the end. Without them, the Bibliography etc. will not be properly displayed. If these files are present, one LaTeX command less needs to be executed than in the scenario where they were not. All in all, there are two Pipelines based on the existence of the auxiliary files:
+- Auxiliary files do not exist, ie. they need to be generated first, so that TOC, TOF etc. will be properly displayed in the output file :
+
 `LaTeX engine --> LaTeX engine [--> BibTeX engine --> LaTeX engine]`
 - Auxiliary files do exist, so the changes can be made visible by only executing the LaTeX command once:
+
 `LaTeX engine [--> BibTeX engine --> LaTeX engine]`
 
-Note that after executing the BibTeX engine, the updates need to be included in the output document by executing the LaTeX engine again.
+Note that after executing the BibTeX engine, the updates need to be included in the output document by executing the LaTeX engine once again.
 
 ### Why not use bash script instead?
-One might think that implementing a simple Bash script and executing it by just specifying the path to the script in the corresponding [TeXShop](https://pages.uoregon.edu/koch/texshop/) engines would be sufficient. However the execution of the file is based the to prior knowledge of which engine to use in the first place. Technically the easiest way would be to create for each LaTeX and BibTeX engine, a corresponding script, since the user wants to stash the auxiliary files into an extra folder, no matter which engine needs to be used. Then, the user needs to specify the path to the right script to be executed in the engines settings each time another engine needs to be used. This can be very error prone *-- by specifying the wrong script --* or/and difficult for users with no knowledge in using such scripts or specifying the engines in the previewer. Now, there is for sure a smarter way, like implementing a script that automatically executes the right engine, by scanning the head of the .tex file for a shebang (Magic Line), however such a functionality implemented in Python can also be used and embedded into other projects, where LaTeX files are generated automatically and has thus a broader application than such a script in itself. Further, when using a script, the compilation pipeline needs to be executed by the user as well. Again, such a Pipeline can be easily implemented in the script, but it will then be executed using LaTeX engine settings while also creating a Bibliography using BibTeX or Biber, which has its own engine settings in the previewer. This has no effect on the compilation at all, but it is just misleading for inexperienced user and also not the best way to solve the problem at hand.
-As mentioned earlier, this Python module enables the possibility to use the provided for compiling generated LaTeX files in an autonomous way without compiling the generated file using LaTeX and BibTex engines by hand.
+One might think that implementing a simple Bash script and executing it by just specifying the path to the script in the corresponding [TeXShop](https://pages.uoregon.edu/koch/texshop/) engines would be sufficient. However, the execution of the file is based to the prior knowledge of which engine to use in the first place. Technically, the easiest way would be to create for each LaTeX and BibTeX engine, a corresponding script, since the user wants to stash the auxiliary files into an extra folder, no matter which engine is used. Then, the user needs to specify the path to the right script that should be executed in the engines settings each time another engine needs to be used. This can be very error prone *-- by specifying the wrong script --* or/and difficult for users with no knowledge in using such scripts or specifying the engines in the previewer. Now, there is for sure a smarter way, like implementing a script that automatically executes the right engine, by scanning the head of the .tex file for a shebang (Magic Line), however such a functionality implemented in Python can also be used and embedded into other projects, where LaTeX files are generated automatically and has thus a broader application than such a script in itself. Further, when using a script, the compilation pipeline needs to be executed by the user as well. Again, such a Pipeline can be easily implemented in the script, but it will then be executed using LaTeX engine settings while also creating a Bibliography using BibTeX or Biber, which has its own engine settings in the previewer. This has no effect on the compilation at all, but it is just misleading for inexperienced user and also not the best way to solve the problem at hand since the BibTeX task is not performed using the provided previewer setting.
+
+As mentioned earlier, this Python module can be used for compiling generated LaTeX files in an autonomous way without compiling the generated file using LaTeX and BibTex engines by hand.
 
 ## Installation
-It is expected that desired LaTeX and BibTeX engines are properly installed and working (before using this module).
-To install the module by simply using PyPi:
+It is expected that the desired LaTeX and BibTeX engines are properly installed and working (before using this module).
+To install the module simply use PyPi:
 
 `pip install LatexCompiler`
 
-or directly from the repository:
+or install directly from the repository:
 
-`pip install git+https://github.com/amrane99/LatexCompiler`
+`pip install git+https://github.com/amrane99/LatexCompiler`.
 
 
 ## Application
-The LatexCompiler can be used for just compiling a .tex file or it can be embedded in a system that generates .tex files to compile it after the generation. 
+The LatexCompiler can be used for just compiling a .tex file or it can be embedded in a system that generates .tex files to compile it after the creation process. 
 
 ### Conventional use from Terminal
 To compile a .tex file it is very important to understand, that the auxiliary files are generated where the *python command* is executed from, for instance the location from where the *LaTeX and BibTeX engines commands* are launched. This means, LaTeX searches for the files like pictures or other .tex files that are included/referenced in a .tex file in the directory where the LaTeX command is launched, not the directory where the .tex file itself is located. In such cases, LaTeX will throw errors like `file not found`, for reference see [this post](https://tex.stackexchange.com/questions/95617/includegraphics-file-not-found-even-when-in-same-directory). So before using this method, it is important to navigate to the directory where the .tex file lives that needs to be compiled:
@@ -201,7 +204,9 @@ Further, any error occurring during the compilation using this module is solely 
 ### Consideration of Shebangs
 Since the provided method does not *-- at no point in the program --* open any files, the so called *Shebangs* or *Magic Lines* of LaTeX or BibTeX are not considered. Even if the shebang for using biber is included in the header of the .tex file, it still has no effect on the compilation, ie. the user needs to specify the engines that should be used by using the Command Line Arguments or when using the function in form of variables. 
 For references: The shebangs for using the LuaLaTeX and Biber engines for compilations would *-- have no effect on the compilation and --* look like the following:
+
 `% !TeX program = lualatex`
+
 `% !BIB TS-program = biber`
 
 
