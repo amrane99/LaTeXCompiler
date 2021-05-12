@@ -16,7 +16,7 @@ LaTeX Compiler:
 import os
 import argparse
 import traceback
-from compile_tex_files import compile_tex_files
+from utils.compile_tex_files import compile_tex_files
 
 def compile_document(tex_engine, bib_engine, no_bib, path, folder_name):
     r"""This function compiles .tex files into .pdf files using the submitted information.
