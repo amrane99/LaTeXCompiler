@@ -80,6 +80,7 @@ With the following flags and arguments, the used engines and name of auxiliary f
 | `-no_bib_engine` | Use this flag if the BibTeX engine should not be used, ie. .tex file has no Bibliography. | no | -- | `False` |
 | `-aux_folder` | Specify the name of the folder in which the auxiliary files will be stashed. | no | -- | `.latex` |
 | `-h` or `--help` | Simply shows help on which arguments can and should be used. | -- | -- | -- |
+
 **Note**:
 Ensure that the name the folder in which the auxiliary files will be stashed in does not interfere with the actual .tex name nor does it occur as a part of other files' names. Since the selection of the files to move is based on a logical expression, naming the folder `.aux` would interfere with the `<file>.aux`. For instance the `<file>.aux` will not be moved into the folder, since the character sequence `.aux` is represented `<file>.aux`. This step is important, because it needs to be ensured that the attempt to move the `../.aux/` folder into `../.aux/`, ie. itself should be avoided in order to bypass possible errors. Knowing this, all files that include the same name as the folders name will be kept automatically in the working directory *-- they will not be moved --*, thus in this scenario the auxiliary file `<file>.aux` would be still present in the working directory.
 
