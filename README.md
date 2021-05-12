@@ -52,7 +52,7 @@ or install directly from the repository:
 The LatexCompiler can be used for just compiling a .tex file or it can be embedded in a system that generates .tex files to compile it after the creation process. 
 
 ### Conventional use from Terminal
-To compile a .tex file it is very important to understand, that the auxiliary files are generated where the *python command* is executed from, for instance the location from where the *LaTeX and BibTeX engines commands* are launched. This means, LaTeX searches for the files like pictures or other .tex files that are included/referenced in a .tex file in the directory where the LaTeX command is launched, not the directory where the .tex file itself is located. In such cases, LaTeX will throw errors like `file not found`, for reference see [this post](https://tex.stackexchange.com/questions/95617/includegraphics-file-not-found-even-when-in-same-directory). So before using this method, it is important to navigate to the directory where the .tex file lives that needs to be compiled:
+To compile a .tex file it is very important to understand, that the auxiliary files are generated where the *python command* is executed from, for instance the location from where the *LaTeX and BibTeX engines commands* are launched. This means, LaTeX searches for the files like pictures or other .tex files that are included/referenced in a .tex file in the directory where the LaTeX command is launched, not the directory where the .tex file itself is located. In such cases, LaTeX will throw errors like `file not found`, for reference see [this post](https://tex.stackexchange.com/questions/95617/includegraphics-file-not-found-even-when-in-same-directory). So before using this method, it is important to navigate to the directory where the .tex file lives that needs to be compiled or provide the full path to the file:
 ```bash
           ~ $ source ~/.bashrc
           ~ $ source activate <your_anaconda_env>
@@ -61,13 +61,13 @@ To compile a .tex file it is very important to understand, that the auxiliary fi
 ```
 Note that the first and second commands are only necessary, if this module is installed in an anaconda environment. If it is installed in the systems environment, these steps can be skipped. The execution of the fourth command will compile the LaTeX file `<file_name>.tex` with the default settings the following way:
 ```bash
- pdflatex --file-line-error --synctex=1 <full_path_to_file_name>.tex
- pdflatex --file-line-error --synctex=1 <full_path_to_file_name>.tex
+ pdflatex --file-line-error --synctex=1 <file_name>.tex
+ pdflatex --file-line-error --synctex=1 <file_name>.tex
  biber <full_path_to_file_name>.tex
- pdflatex --file-line-error --synctex=1 <full_path_to_file_name>.tex
+ pdflatex --file-line-error --synctex=1 <file_name>.tex
 ```
-Further the auxiliary files will be stashed in the auxiliary `.latex/` directory that is on the same level located as  `<full_path_to_file_name>.tex`.
-Note that the algorithm will first check if the auxiliary directory already exists, in which case the auxiliary files can be used in the LaTeX command. That way, `<full_path_to_file_name>.tex` only needs to be compiled once before using BibTeX to include the changes. Further, the full path to `<file_name>.tex` will be extracted in the module, if the command has been executed in the working folder where the file is located. If the command will not be executed from the working directory, it is crucial to provide the full path to the `<file_name>.tex`, so the auxiliary folder is generated at the right location.
+Further the auxiliary files will be stashed in the auxiliary `.latex/` directory that is on the same level located as  `<path>/<file_name>.tex`.
+Note that the algorithm will first check if the auxiliary directory already exists, in which case the auxiliary files can be used in the LaTeX command. That way, `<file_name>.tex` only needs to be compiled once before using BibTeX to include the changes. Further, the full path to `<file_name>.tex` will be extracted in the module, if the command has been executed in the working folder where the file is located. If the command will not be executed from the working directory, it is crucial to provide the full path to the `<file_name>.tex`, so the auxiliary folder is generated at the right location, otherwise either the LaTeX or BibTeX engine will fail to build the output.
 
 ### Command Line Arguments
 With the following flags and arguments, the used engines and name of auxiliary folder can be specified:
@@ -82,7 +82,7 @@ With the following flags and arguments, the used engines and name of auxiliary f
 | `-h` or `--help` | Simply shows help on which arguments can and should be used. | -- | -- | -- |
 
 #### Example use cases
-1. If the LaTeX `example.tex` file, located at `/LaTeX_project_XX` needs to be executed using LuaLaTeX and BibTeX, by stashing the auxiliary files into `/LaTeX_project_XX/.aux/`, the command would be the following: 
+1. If the LaTeX `example.tex` file, located at `../LaTeX_project_XX/` needs to be executed using LuaLaTeX and BibTeX, by stashing the auxiliary files into `../LaTeX_project_XX/.aux/`, the command would be the following: 
 ```bash
           ~ $ source ~/.bashrc
           ~ $ source activate <your_anaconda_env>
@@ -91,7 +91,7 @@ With the following flags and arguments, the used engines and name of auxiliary f
                                                        -tex_engine lualatex -bib_engine bibtex
                                                        -aux_folder .aux
 ```
-2. If the LaTeX `example.tex` file, located at `/LaTeX_project_XX` needs to be executed using XeLaTeX without using a BibTeX engine since it does not have a bibliography, while stashing the auxiliary files into `/LaTeX_project_XX/auxiliary_files/`, the command would be the following: 
+2. If the LaTeX `example.tex` file, located at `../LaTeX_project_XX` needs to be executed using XeLaTeX without using a BibTeX engine since it does not have a bibliography, while stashing the auxiliary files into `../LaTeX_project_XX/auxiliary_files/`, the command would be the following: 
 ```bash
           ~ $ source ~/.bashrc
           ~ $ source activate <your_anaconda_env>
@@ -102,10 +102,10 @@ With the following flags and arguments, the used engines and name of auxiliary f
 ```
 Note that in the second example no BibTeX engine will be used, so the command
 ```bash
- xelatex /LaTeX_project_XX/example.tex
+ xelatex ../LaTeX_project_XX/example.tex
 ```
 
-would be executed only once, if the auxiliary files at `/LaTeX_project_XX/auxiliary_files/` exist and twice otherwise. In both examples, the first two steps can be omitted, if this module is installed in the systems environment. Further, if the command will be executed within the folder of the .tex file, only the .tex file itself and not the full path needs to be provided.
+would be executed only once, if the auxiliary files at `../LaTeX_project_XX/auxiliary_files/` exist and twice otherwise. In both examples, the first two steps can be omitted, if this module is installed in the systems environment. Further, if the command will be executed within the folder of the .tex file, only the .tex file itself and not the full path needs to be provided.
 
 ### Folder Structure after compilation
 After successfully compiling the .tex file, all from the engines generated auxiliary files are stored in the specified folder. First of all, it is important to define which files are all auxiliary files:
@@ -186,7 +186,7 @@ Let's assume there is a Python algorithm/program that automatically generates a 
 ```python
 import os
 from <own_module> import some_transformation_to_tex
-from LatexCompiler.LatexCompiler import LC
+from LatexCompiler import LC
 
 # -- Load .csv -- #
 csv = open('<dest_path>', 'r')
@@ -201,7 +201,7 @@ with open(tex_name, "w") as f:
     f.write(tex)
 
 # -- Now compile the file using module -- #
-LC.compile_document(tex_engine = 'LuaLaTeX',
+LC.compile_document(tex_engine = 'lualatex',
                     bib_engine = 'biber', # Value is not necessary
                     no_bib = True, path = tex_name, # Provide the full path to the file!
                     folder_name = '.aux')

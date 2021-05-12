@@ -31,7 +31,7 @@ def compile_tex_files(tex_engine, bib_engine, no_bib, basedir, auxdir, path, fol
                 # Move auxiliary files
                 _move_files(auxdir, basedir)
             # Execute LaTeX engine
-            _compile_file(tex_engines[tex_engine], path)
+            _compile_file(tex_engines[tex_engine], basedir, path)
 
     # Use BibLaTex --> compile 2 times LaTeX -- 1 time BibLaTex -- 1 time LaTeX
     else:
@@ -45,14 +45,15 @@ def compile_tex_files(tex_engine, bib_engine, no_bib, basedir, auxdir, path, fol
                 _compile_file(bib_engines[bib_engine], path.replace('.tex', ''))
             else:
                 # Execute LaTeX engine
-                _compile_file(tex_engines[tex_engine], path)
+                _compile_file(tex_engines[tex_engine], basedir, path)
 
     # Stash auxiliary files
     _stash_auxiliary_files(basedir, auxdir, folder_name)
 
-def _compile_file(engine, e_file):
+def _compile_file(engine, path, e_file):
     r"""This function executes a file using the correspodning (provided) engine."""
-    # Execute engine
+    # Change directory and execute engine
+    os.chdir(path)
     os.system(engine + e_file)
     
 def _move_files(dest, target):

@@ -16,7 +16,7 @@ LaTeX Compiler:
 import os
 import argparse
 import traceback
-from LatexCompiler.compile_tex_files import compile_tex_files
+from compile_tex_files import compile_tex_files
 
 def compile_document(tex_engine, bib_engine, no_bib, path, folder_name):
     r"""This function compiles .tex files into .pdf files using the submitted information.
@@ -35,7 +35,7 @@ def compile_document(tex_engine, bib_engine, no_bib, path, folder_name):
     # 1. Extract necessary paths
     # Get current directory to texfile
     basedir = os.path.dirname(os.path.realpath(path))
-    # Define directory /<foldername> for auxiliary files
+    # Define directory ../<foldername>/ for auxiliary files
     auxdir = os.path.join(basedir, folder_name)
     
     # 2. Compile document(s) using tex_engine and bib_engine if no_bib = False
