@@ -45,7 +45,7 @@ To install the module *-- if desired in an Anaconda environment --* simply use P
 
 or install directly from the repository:
 
-`pip install git+https://github.com/amrane99/LatexCompiler`.
+`pip install git+https://github.com/amrane99/LatexCompiler`
 
 
 ## Application
@@ -80,16 +80,18 @@ With the following flags and arguments, the used engines and name of auxiliary f
 | `-no_bib_engine` | Use this flag if the BibTeX engine should not be used, ie. .tex file has no Bibliography. | no | -- | `False` |
 | `-aux_folder` | Specify the name of the folder in which the auxiliary files will be stashed. | no | -- | `.latex` |
 | `-h` or `--help` | Simply shows help on which arguments can and should be used. | -- | -- | -- |
+**Note**:
+Ensure that the name the folder in which the auxiliary files will be stashed in does not interfere with the actual .tex name nor does it occur as a part of other files' names. Since the selection of the files to move is based on a logical expression, naming the folder `.aux` would interfere with the `<file>.aux`. For instance the `<file>.aux` will not be moved into the folder, since the character sequence `.aux` is represented `<file>.aux`. This step is important, because it needs to be ensured that the attempt to move the `../.aux/` folder into `../.aux/`, ie. itself should be avoided in order to bypass possible errors. Knowing this, all files that include the same name as the folders name will be kept automatically in the working directory *-- they will not be moved --*, thus in this scenario the auxiliary file `<file>.aux` would be still present in the working directory.
 
 #### Example use cases
-1. If the LaTeX `example.tex` file, located at `../LaTeX_project_XX/` needs to be executed using LuaLaTeX and BibTeX, by stashing the auxiliary files into `../LaTeX_project_XX/.aux/`, the command would be the following: 
+1. If the LaTeX `example.tex` file, located at `../LaTeX_project_XX/` needs to be executed using LuaLaTeX and BibTeX, by stashing the auxiliary files into `../LaTeX_project_XX/.aux_files/`, the command would be the following: 
 ```bash
           ~ $ source ~/.bashrc
           ~ $ source activate <your_anaconda_env>
 (<your_anaconda_env>) $ cd LaTeX_project_XX
 (<your_anaconda_env>) LaTeX_project_XX $ LatexCompiler -file example.tex
                                                        -tex_engine lualatex -bib_engine bibtex
-                                                       -aux_folder .aux
+                                                       -aux_folder .aux_files
 ```
 2. If the LaTeX `example.tex` file, located at `../LaTeX_project_XX` needs to be executed using XeLaTeX without using a BibTeX engine since it does not have a bibliography, while stashing the auxiliary files into `../LaTeX_project_XX/auxiliary_files/`, the command would be the following: 
 ```bash
@@ -157,7 +159,7 @@ After normal execution using previewers, all auxiliary files are stored at the s
         ├── <file_to_compile>.log
         ├── ...
 
-What the user really wants from all generated files is only the `<file_to_compile>.pdf` file, everything else is not of relevance for the conventional user. When compiling the `<file_to_compile>.tex` file using this module and specifying the folder name to be `.aux/`, the working directory structure will look like the following on the compilation is done:
+What the user really wants from all generated files is only the `<file_to_compile>.pdf` file, everything else is not of relevance for the conventional user. When compiling the `<file_to_compile>.tex` file using this module and specifying the folder name to be `.aux_files/`, the working directory structure will look like the following on the compilation is done:
 
     <directory_to_tex_file>/
         ├── <file_to_compile>.tex
@@ -174,7 +176,7 @@ What the user really wants from all generated files is only the `<file_to_compil
         │   ├── input_00.pdf
         │   ├── input_00.pdf
         │   ├── ...
-        └── .aux/
+        └── .aux_files/
             ├── <file_to_compile>.aux
             ├── <file_to_compile>.toc
             ├── <file_to_compile>.bcf
@@ -204,9 +206,9 @@ with open(tex_name, "w") as f:
 LC.compile_document(tex_engine = 'lualatex',
                     bib_engine = 'biber', # Value is not necessary
                     no_bib = True, path = tex_name, # Provide the full path to the file!
-                    folder_name = '.aux')
+                    folder_name = '.aux_files')
 ```
-In this example, a .csv file will be loaded using Python, than transformed into a .tex file using a provided and implemented function *-- some_transformation_to_tex --> Pseudo Function --* and saved at a specified path `<targ_path>/<file>.tex`. *-- In such a scenario it is of crucial importance to provide the full path to the .tex file that needs to be compiled, since the algorithm/program and thus the engines might not be triggered in the same directory as the file is created! --* Then the LatexCompiler module function will be used to compile the just saved .tex file using LuaLateX and **no** BibTeX engine. The auxiliary files will be stored under `<targ_path>/.aux` . It is important to say, that `no_bib = True` indicates that no BibTeX engine needs to be used, ie. `bib_engine` will not be considered in such a scenario.
+In this example, a .csv file will be loaded using Python, than transformed into a .tex file using a provided and implemented function *-- some_transformation_to_tex --> Pseudo Function --* and saved at a specified path `<targ_path>/<file>.tex`. *-- In such a scenario it is of crucial importance to provide the full path to the .tex file that needs to be compiled, since the algorithm/program and thus the engines might not be triggered in the same directory as the file is created! --* Then the LatexCompiler module function will be used to compile the just saved .tex file using LuaLateX and **no** BibTeX engine. The auxiliary files will be stored under `<targ_path>/.aux_files` . It is important to say, that `no_bib = True` indicates that no BibTeX engine needs to be used, ie. `bib_engine` will not be considered in such a scenario.
 Further, any error occurring during the compilation using this module is solely caused by the LaTeX files and not from the Python code itself, since the code only executes LaTeX commands.
 
 ### Consideration of Shebangs
