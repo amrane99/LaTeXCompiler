@@ -79,7 +79,7 @@ With the following flags and arguments, the used engines and name of auxiliary f
 | `-bib_engine` | Specify which BibTeX engine to use. | no | `biber, bibtex` | `biber` |
 | `-no_bib_engine` | Use this flag if the BibTeX engine should not be used, ie. .tex file has no Bibliography. | no | -- | `False` |
 | `-aux_folder` | Specify the name of the folder in which the auxiliary files will be stashed. | no | -- | `.latex` |
-| `-help` | Simply shows help on which arguments can and should be used. | -- | -- | -- |
+| `-h` or `--help` | Simply shows help on which arguments can and should be used. | -- | -- | -- |
 
 #### Example use cases
 1. If the LaTeX `example.tex` file, located at `/LaTeX_project_XX` needs to be executed using LuaLaTeX and BibTeX, by stashing the auxiliary files into `/LaTeX_project_XX/.aux/`, the command would be the following: 
