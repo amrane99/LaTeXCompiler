@@ -26,6 +26,11 @@ def compile_document(tex_engine, bib_engine, no_bib, path, folder_name):
               # Code that generates a .tex file
               # ...
               compile_document(...) # Compile the generated .tex file LaTeX using the specified engines etc.
+        tex_engine = one of {'pdflatex', 'lualatex', 'xelatex'} --> <string>: specifies which LaTeX engine to use
+        bib_engine = one of {'biber', 'bibtex'} --> <string>:  specifies which BibTeX engine to use
+        no_bib = <bool>: specifies if a BibTeX engine needs to be used
+        path = <string>: represents the [full] path to the file that needs to be compiled
+        folder_name =  <string>: represents the folder name in which the auxiliary files should be stashed
         """
     # 1. Extract necessary paths
     # Get current directory to texfile
@@ -49,9 +54,10 @@ def _main():
                              ' Default: biber engine will be used to compile.')
     parser.add_argument('-no_bib_engine', action='store_const', const=True, default=False,
                         help='Use this flag if the BibTeX engine should not be used, ie. .tex file has no Bibliography.'+
-                            ' Default: BibTex engine will be used.')
+                            ' Default: BibTeX engine will be used.')
     parser.add_argument('-file', action='store', type=str, nargs=1, required=True,
-                        help='Specify full path to the main .tex file.')
+                        help='Specify full path to the main .tex file if the file is not in the current folder from' +
+                             ' where the command is executed.')
     parser.add_argument('-aux_folder', action='store', type=str, nargs=1, required=False, default='.latex',
                         help='Specify the name of the folder in which the auxiliary files will be stashed.'+
                              ' Default: All auxiliary files will be saved into /.latex.')

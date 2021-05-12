@@ -4,21 +4,21 @@
 from setuptools import setup, find_packages
 
 setup(
-  name = 'LatexCompiler',         # How you named your package folder (MyLib)
-  packages = ['LatexCompiler'],   # Chose the same as "name"
+  name = 'LatexCompiler',         # How you named package folder (LatexCompiler)
+  packages = ['LatexCompiler'],   # Choose the same as "name"
   version = '1.0',     # Start with a small number and increase it with every change you make
   license='MIT',       # Chose a license from here: https://help.github.com/articles/licensing-a-repository
-  description = 'A program for compiling LaTeX files the convenient way by stashing the auxiliary files into a specified folder.',   # Give a short description about your library
-  author = 'Amin Ranem',                   # Type in your name
-  author_email = 'aminranem@googlemail.com',      # Type in your E-Mail
-  url = 'https://github.com/amrane99/',   # Provide either the link to your github or to your website
+  description = 'A program for compiling LaTeX files the convenient way by stashing the auxiliary files into a specified folder.',   # Give a short description about library
+  author = 'Amin Ranem',                   # Type in name
+  author_email = 'aminranem@googlemail.com',      # Type in E-Mail
+  url = 'https://github.com/amrane99/',   # Provide either the link to github or to own website
   download_url = 'https://github.com/amrane99/LatexCompiler',
-  keywords = ['LaTeX', 'Python'],   # Keywords that define your package best
-  install_requires=[            # I get to this in a second
-          'tqdm',
+  keywords = ['LaTeX', 'BibTeX', 'Python'],   # Keywords that define package best
+  install_requires=[            # Same as requirements.txt
+          'tqdm'
       ],
   classifiers=[
-    'Development Status :: 3 - Alpha',      # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
+    'Development Status :: 5 - Production/Stable',      # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
     'Intended Audience :: Developers, Users',      # Define that your audience are developers
     'Topic :: Software Development :: Build Tools',
     'License :: OSI Approved :: MIT License',   # Again, pick a license
