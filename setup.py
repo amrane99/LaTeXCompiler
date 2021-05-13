@@ -35,7 +35,6 @@ setup(
   entry_points={
     'console_scripts': [
         'LaTeXCompiler = latexcompiler.LC:main',
-        'LatexCompiler = latexcompiler.LC:main',
     ],
   },
 )
