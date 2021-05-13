@@ -40,12 +40,14 @@ As mentioned earlier, this Python module can be used for compiling generated LaT
 ## Installation
 It is expected that the desired LaTeX and BibTeX engines are properly installed and working (before using this module).
 To install the module *-- if desired in an Anaconda environment --* simply use PyPi:
-
-`pip install LatexCompiler`
+```bash
+pip install LatexCompiler
+```
 
 or install directly from the repository:
-
-`pip install git+https://github.com/amrane99/LatexCompiler`
+```bash
+pip install git+https://github.com/amrane99/LatexCompiler
+```
 
 
 ## Application
