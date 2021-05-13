@@ -4,8 +4,8 @@
 from setuptools import setup, find_packages
 
 setup(
-  name = 'latexcompiler',         # How you named package folder (LatexCompiler)
-  packages=find_packages(include=["latexcompiler", "latexcompiler.*"]),
+  name = 'LatexCompiler',         # How you named package folder (LatexCompiler)
+  packages=find_packages(include=['latexcompiler', 'latexcompiler.*']),
   version = '1.0',     # Start with a small number and increase it with every change you make
   license='MIT',       # Chose a license from here: https://help.github.com/articles/licensing-a-repository
   description = 'A program for compiling LaTeX files the convenient way by stashing the auxiliary files into a specified folder.',   # Give a short description about library

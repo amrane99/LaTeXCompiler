@@ -1,3 +1,6 @@
+# -e . Necessary so the packages can be important throughout the code
+-e .
+
 # LaTeX-Compiler/setup.py: 4
 setuptools == 54.2.0
 
