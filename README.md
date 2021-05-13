@@ -41,12 +41,12 @@ As mentioned earlier, this Python module can be used for compiling generated LaT
 It is expected that the desired LaTeX and BibTeX engines are properly installed and working (before using this module).
 To install the module *-- if desired in an Anaconda environment --* simply use PyPi:
 ```bash
-pip install LatexCompiler
+pip install LaTeXCompiler
 ```
 
 or install directly from the repository:
 ```bash
-pip install git+https://github.com/amrane99/LatexCompiler
+pip install git+https://github.com/amrane99/LaTeXCompiler
 ```
 
 
@@ -59,7 +59,7 @@ To compile a .tex file it is very important to understand, that the auxiliary fi
           ~ $ source ~/.bashrc
           ~ $ source activate <your_anaconda_env>
 (<your_anaconda_env>) $ cd LaTeX_project_XX
-(<your_anaconda_env>) LaTeX_project_XX $ LatexCompiler -file <file_name>.tex
+(<your_anaconda_env>) LaTeX_project_XX $ LaTeXCompiler -file <file_name>.tex
 ```
 Note that the first and second commands are only necessary, if this module is installed in an anaconda environment. If it is installed in the systems environment, these steps can be skipped. The execution of the fourth command will compile the LaTeX file `<file_name>.tex` with the default settings the following way:
 ```bash
@@ -92,7 +92,7 @@ Ensure that the name the folder in which the auxiliary files will be stashed in 
           ~ $ source ~/.bashrc
           ~ $ source activate <your_anaconda_env>
 (<your_anaconda_env>) $ cd LaTeX_project_XX
-(<your_anaconda_env>) LaTeX_project_XX $ LatexCompiler -file example.tex
+(<your_anaconda_env>) LaTeX_project_XX $ LaTeXCompiler -file example.tex
                                                        -tex_engine lualatex -bib_engine bibtex
                                                        -aux_folder .aux_files
 ```
@@ -101,7 +101,7 @@ Ensure that the name the folder in which the auxiliary files will be stashed in 
           ~ $ source ~/.bashrc
           ~ $ source activate <your_anaconda_env>
 (<your_anaconda_env>) $ cd LaTeX_project_XX
-(<your_anaconda_env>) LaTeX_project_XX $ LatexCompiler -file example.tex
+(<your_anaconda_env>) LaTeX_project_XX $ LaTeXCompiler -file example.tex
                                                        -tex_engine xelatex -no_bib_engine
                                                        -aux_folder auxiliary_files
 ```
@@ -211,7 +211,7 @@ LC.compile_document(tex_engine = 'lualatex',
                     no_bib = True, path = tex_name, # Provide the full path to the file!
                     folder_name = '.aux_files')
 ```
-In this example, a .csv file will be loaded using Python, than transformed into a .tex file using a provided and implemented function *-- some_transformation_to_tex --> Pseudo Function --* and saved at a specified path `<targ_path>/<file>.tex`. *-- In such a scenario it is of crucial importance to provide the full path to the .tex file that needs to be compiled, since the algorithm/program and thus the engines might not be triggered in the same directory as the file is created! --* Then the LatexCompiler module function will be used to compile the just saved .tex file using LuaLateX and **no** BibTeX engine. The auxiliary files will be stored under `<targ_path>/.aux_files` . It is important to say, that `no_bib = True` indicates that no BibTeX engine needs to be used, ie. `bib_engine` will not be considered in such a scenario. An example implementation is provided under [`example/example.py`](https://github.com/amrane99/LatexCompiler/blob/main/example/example.py).
+In this example, a .csv file will be loaded using Python, than transformed into a .tex file using a provided and implemented function *-- some_transformation_to_tex --> Pseudo Function --* and saved at a specified path `<targ_path>/<file>.tex`. *-- In such a scenario it is of crucial importance to provide the full path to the .tex file that needs to be compiled, since the algorithm/program and thus the engines might not be triggered in the same directory as the file is created! --* Then the LatexCompiler module function will be used to compile the just saved .tex file using LuaLateX and **no** BibTeX engine. The auxiliary files will be stored under `<targ_path>/.aux_files` . It is important to say, that `no_bib = True` indicates that no BibTeX engine needs to be used, ie. `bib_engine` will not be considered in such a scenario. An example implementation is provided under [`example/example.py`](https://github.com/amrane99/LaTeXCompiler/blob/main/example/example.py).
 Further, any error occurring during the compilation using this module is solely caused by the LaTeX files and not from the Python code itself, since the code only executes LaTeX commands.
 
 ### Consideration of Shebangs

@@ -11,7 +11,7 @@ HERE = pathlib.Path(__file__).parent
 README = (HERE / "README.md").read_text()
 
 setup(
-  name = 'LatexCompiler',         # How you named package folder (LatexCompiler)
+  name = 'LaTeXCompiler',         # How you named package folder (LatexCompiler)
   packages=find_packages(include=['latexcompiler', 'latexcompiler.*']),
   version = '1.0',     # Start with a small number and increase it with every change you make
   license='MIT',       # Chose a license from here: https://help.github.com/articles/licensing-a-repository
@@ -21,7 +21,7 @@ setup(
   author = 'Amin Ranem',                   # Type in name
   author_email = 'aminranem@googlemail.com',      # Type in E-Mail
   url = 'https://github.com/amrane99/LatexCompiler',   # Provide either the link to github or to own website
-  download_url = 'https://github.com/amrane99/LatexCompiler/archive/refs/tags/v1.0.tar.gz',    # Link to desired release
+  download_url = 'https://github.com/amrane99/LaTeXCompiler/archive/refs/tags/v1.0.tar.gz',    # Link to desired release
   keywords = ['LaTeX', 'BibTeX', 'Python'],   # Keywords that define package best
   install_requires=[            # Same as requirements.txt
           'tqdm'
@@ -34,6 +34,7 @@ setup(
   ],
   entry_points={
     'console_scripts': [
+        'LaTeXCompiler = latexcompiler.LC:main',
         'LatexCompiler = latexcompiler.LC:main',
     ],
   },
