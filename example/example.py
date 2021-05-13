@@ -8,7 +8,7 @@ hase been installed using pip.
 """
 
 # -- Import installed module -- #
-from LatexCompiler import LC
+from latexcompiler import LC
 
 # -- Compile existing tex file at path -- #
 tex_name = '<full_path_to_tex_file>'      # <-- Specify your tex file there

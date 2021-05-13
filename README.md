@@ -191,7 +191,7 @@ Let's assume there is a Python algorithm/program that automatically generates a 
 ```python
 import os
 from <own_module> import some_transformation_to_tex
-from LatexCompiler import LC
+from latexcompiler import LC
 
 # -- Load .csv -- #
 csv = open('<dest_path>', 'r')
@@ -211,7 +211,7 @@ LC.compile_document(tex_engine = 'lualatex',
                     no_bib = True, path = tex_name, # Provide the full path to the file!
                     folder_name = '.aux_files')
 ```
-In this example, a .csv file will be loaded using Python, than transformed into a .tex file using a provided and implemented function *-- some_transformation_to_tex --> Pseudo Function --* and saved at a specified path `<targ_path>/<file>.tex`. *-- In such a scenario it is of crucial importance to provide the full path to the .tex file that needs to be compiled, since the algorithm/program and thus the engines might not be triggered in the same directory as the file is created! --* Then the LatexCompiler module function will be used to compile the just saved .tex file using LuaLateX and **no** BibTeX engine. The auxiliary files will be stored under `<targ_path>/.aux_files` . It is important to say, that `no_bib = True` indicates that no BibTeX engine needs to be used, ie. `bib_engine` will not be considered in such a scenario.
+In this example, a .csv file will be loaded using Python, than transformed into a .tex file using a provided and implemented function *-- some_transformation_to_tex --> Pseudo Function --* and saved at a specified path `<targ_path>/<file>.tex`. *-- In such a scenario it is of crucial importance to provide the full path to the .tex file that needs to be compiled, since the algorithm/program and thus the engines might not be triggered in the same directory as the file is created! --* Then the LatexCompiler module function will be used to compile the just saved .tex file using LuaLateX and **no** BibTeX engine. The auxiliary files will be stored under `<targ_path>/.aux_files` . It is important to say, that `no_bib = True` indicates that no BibTeX engine needs to be used, ie. `bib_engine` will not be considered in such a scenario. An example implementation is provided under [`example/example.py`](https://github.com/amrane99/LatexCompiler/blob/main/example/example.py).
 Further, any error occurring during the compilation using this module is solely caused by the LaTeX files and not from the Python code itself, since the code only executes LaTeX commands.
 
 ### Consideration of Shebangs
