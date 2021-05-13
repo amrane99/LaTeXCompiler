@@ -20,7 +20,7 @@ setup(
   long_description_content_type="text/markdown",
   author = 'Amin Ranem',                   # Type in name
   author_email = 'aminranem@googlemail.com',      # Type in E-Mail
-  url = 'https://github.com/amrane99/',   # Provide either the link to github or to own website
+  url = 'https://github.com/amrane99/LatexCompiler',   # Provide either the link to github or to own website
   download_url = 'https://github.com/amrane99/LatexCompiler/archive/refs/tags/v1.0.tar.gz',    # Link to desired release
   keywords = ['LaTeX', 'BibTeX', 'Python'],   # Keywords that define package best
   install_requires=[            # Same as requirements.txt
