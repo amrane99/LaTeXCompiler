@@ -16,13 +16,13 @@ LaTeX Compiler:
 import os
 import argparse
 import traceback
-from utils.compile_tex_files import compile_tex_files
+from LatexCompiler.utils.compile_tex_files import compile_tex_files
 
 def compile_document(tex_engine, bib_engine, no_bib, path, folder_name):
     r"""This function compiles .tex files into .pdf files using the submitted information.
         NOTE: It can especially be used for programs that generate (LaTeX) file to compile them
               afterwards into reports (pdf) in an autmoated manner without human steps, e.g.:
-              import JC._compile_document as compile_document
+              from LatexCompiler.LC import compile_document
               # Code that generates a .tex file
               # ...
               compile_document(...) # Compile the generated .tex file LaTeX using the specified engines etc.
@@ -41,7 +41,7 @@ def compile_document(tex_engine, bib_engine, no_bib, path, folder_name):
     # 2. Compile document(s) using tex_engine and bib_engine if no_bib = False
     compile_tex_files(tex_engine, bib_engine, no_bib, basedir, auxdir, path, folder_name)
     
-def _main():
+def main():
     # 1. Build Argumentparser
     parser = argparse.ArgumentParser(description='Compile a Latex file the convenient way by using only one command.'+
                                                   ' The auxiliary files will be stored in a seperate folder, so only the'+
@@ -82,6 +82,3 @@ def _main():
         # Print error message
         error = traceback.format_exc()
         print('During the compilation of the files the following error occured: {}.'.format(error))
-
-if __name__ == "__main__":
-    _main()
