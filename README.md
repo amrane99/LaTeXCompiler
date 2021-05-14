@@ -49,7 +49,7 @@ or install directly from the repository:
 pip install git+https://github.com/amrane99/LaTeXCompiler
 ```
 
-If the repository will be forked or cloned, remember to install the [`requirementes.txt`](https://github.com/amrane99/LaTeXCompiler/blob/main/requirements.txt) file by using:
+If the repository will be forked or cloned, remember to install all dependencies from the [`requirementes.txt`](https://github.com/amrane99/LaTeXCompiler/blob/main/requirements.txt) file by using:
 ```bash
 pip install -r requirements.txt
 ```
