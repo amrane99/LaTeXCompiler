@@ -49,6 +49,10 @@ or install directly from the repository:
 pip install git+https://github.com/amrane99/LaTeXCompiler
 ```
 
+If the repository will be forked or cloned, remember to install the [`requirementes.txt`](https://github.com/amrane99/LaTeXCompiler/blob/main/requirements.txt) file by using:
+```bash
+pip install -r requirements.txt
+```
 
 ## Application
 The LatexCompiler can be used for just compiling a .tex file or it can be embedded in a system that generates .tex files to compile it after the creation process. 
