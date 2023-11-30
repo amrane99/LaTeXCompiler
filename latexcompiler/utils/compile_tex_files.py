@@ -42,7 +42,7 @@ def compile_tex_files(tex_engine, bib_engine, no_bib, basedir, auxdir, path, fol
                 _move_files(auxdir, basedir)
             if i == 2:
                 # Execute BibTeX engine
-                _compile_file(bib_engines[bib_engine], path.replace('.tex', ''))
+                _compile_file(bib_engines[bib_engine], basedir, path.replace('.tex', ''))
             else:
                 # Execute LaTeX engine
                 _compile_file(tex_engines[tex_engine], basedir, path)
